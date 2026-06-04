@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Julián Barreto — Performance Marketing Manager</title>
-<meta name="description" content="Performance Marketing Manager. Sistemas de adquisición para B2B y high-ticket en USA & LATAM." />
+<title>Julián Barreto — Performance & Growth Marketing</title>
+<meta name="description" content="Performance & Growth Marketing. Diseño sistemas de adquisición y revenue para negocios B2B y high-ticket en USA, Puerto Rico y LATAM. Casos reales con CAC, ROAS y revenue medibles." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -223,7 +223,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section > .section-intro,
 .section > .hero-grid,
 .section > .about-split,
+.section > .accordion,
 .section > .exp-grid,
+.section > .edu-grid,
+.section > .cert-wrap,
 .section > .stack-grid,
 .section > .contact-title,
 .section > .contact-sub,
@@ -964,6 +967,102 @@ body.modal-open { overflow: hidden; }
     opacity: 1 !important; transform: none !important;
   }
 }
+
+/* ===== CASE STUDY + GROWTH EXTRAS ===== */
+.exp-card-stats { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.exp-card-stat { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.exp-card-stat-value { font-family: var(--font-display); font-size: clamp(17px, 1.7vw, 23px);
+  font-weight: 600; color: var(--accent); letter-spacing: -0.01em; line-height: 1.05; }
+.exp-card-stat-label { font-family: var(--font-mono); font-size: 9px; color: var(--text-3);
+  letter-spacing: 0.15em; text-transform: uppercase; }
+
+.case-media { margin-bottom: 32px; }
+.case-media-img { width: 100%; display: block; border: 1px solid var(--border); border-radius: 12px; }
+.case-media-cap { font-family: var(--font-mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: 0.05em; margin-top: 10px; }
+.case-media.empty .case-media-ph { display: flex; align-items: center; justify-content: center;
+  gap: 12px; min-height: 140px; border: 1px dashed var(--border-strong); border-radius: 12px;
+  background: rgba(255,87,34,0.03); text-align: center; padding: 24px 20px;
+  font-family: var(--font-mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.05em; line-height: 1.6; }
+.case-media-ph-icon { color: var(--accent); font-size: 20px; }
+
+.case-block { margin-bottom: 28px; }
+.case-block-title { font-family: var(--font-mono); font-size: 10px; color: var(--accent);
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 14px; padding-left: 16px; position: relative; }
+.case-block-title::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 7px; height: 7px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); }
+.case-block-text { color: var(--text-2); font-size: 15px; line-height: 1.7; margin: 0; }
+.case-block-text.accent-text { color: var(--text); font-weight: 500; }
+.case-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.case-list li { position: relative; padding-left: 24px; color: var(--text-2); font-size: 14px; line-height: 1.6; }
+.case-list li::before { content: '→'; position: absolute; left: 0; top: 0; color: var(--accent); }
+
+/* EDUCATION */
+.edu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+@media (max-width: 900px) { .edu-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .edu-grid { grid-template-columns: 1fr; } }
+.edu-card { padding: 30px 26px; border: 1px solid var(--border); border-radius: 16px;
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease); position: relative; overflow: hidden; }
+.edu-card:hover { border-color: var(--border-strong); transform: translateY(-4px); }
+.edu-card-year { font-family: var(--font-mono); font-size: 10px; color: var(--accent);
+  letter-spacing: 0.15em; margin-bottom: 18px; }
+.edu-card-title { font-family: var(--font-display); font-weight: 500; font-size: 17px;
+  line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 12px; }
+.edu-card-org { font-family: var(--font-mono); font-size: 10px; color: var(--text-2);
+  letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ===== ABOUT ACCORDION ===== */
+.accordion { margin-top: 24px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.acc-item { border-bottom: 1px solid var(--border); }
+.acc-item:last-child { border-bottom: none; }
+.acc-head { width: 100%; display: flex; align-items: center; gap: 20px; padding: 24px 32px;
+  text-align: left; position: relative; transition: background .3s var(--ease), padding-left .3s var(--ease); }
+.acc-head::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--accent); transform: scaleY(0); transition: transform .3s var(--ease); }
+.acc-head:hover { background: rgba(255,255,255,0.02); padding-left: 40px; }
+.acc-item.open .acc-head { background: rgba(255,87,34,0.05); padding-left: 40px; }
+.acc-item.open .acc-head::before { transform: scaleY(1); }
+.acc-num { font-family: var(--font-mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: .15em; min-width: 34px; transition: color .3s; }
+.acc-head:hover .acc-num, .acc-item.open .acc-num { color: var(--accent); }
+.acc-name { font-family: var(--font-display); font-weight: 500; font-size: clamp(16px,1.4vw,20px);
+  letter-spacing: -.01em; flex-grow: 1; transition: color .3s; }
+.acc-item.open .acc-name { color: var(--accent); }
+.acc-icon { position: relative; width: 14px; height: 14px; flex-shrink: 0; }
+.acc-icon::before, .acc-icon::after { content: ''; position: absolute; background: var(--text-2);
+  transition: transform .3s var(--ease), background .3s; }
+.acc-icon::before { top: 50%; left: 0; right: 0; height: 1.5px; transform: translateY(-50%); }
+.acc-icon::after { left: 50%; top: 0; bottom: 0; width: 1.5px; transform: translateX(-50%); }
+.acc-item.open .acc-icon::after { transform: translateX(-50%) scaleY(0); }
+.acc-head:hover .acc-icon::before, .acc-head:hover .acc-icon::after, .acc-item.open .acc-icon::before { background: var(--accent); }
+.acc-panel { max-height: 0; overflow: hidden; transition: max-height .45s var(--ease); }
+.acc-panel-inner { padding: 0 32px 28px 34px; }
+.acc-desc { color: var(--text-2); font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+.acc-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.acc-tag { font-family: var(--font-mono); font-size: 10px; color: var(--text-2); padding: 6px 12px;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 999px; letter-spacing: .05em; }
+@media (max-width: 600px){ .acc-head{ padding:20px 22px; gap:14px; } .acc-panel-inner{ padding:0 22px 24px 24px; } }
+
+/* ===== FORMACIÓN / CERTS ===== */
+.cert-wrap { margin-top: 24px; display: grid; grid-template-columns: 0.9fr 2fr; gap: 16px; align-items: start; }
+@media (max-width: 1000px){ .cert-wrap{ grid-template-columns: 1fr; } }
+.edu-degree { padding: 32px 28px; border: 1px solid var(--border-strong); border-radius: 16px;
+  background: rgba(255,87,34,0.04); display: flex; flex-direction: column; }
+.edu-degree-title { font-family: var(--font-display); font-weight: 500; font-size: clamp(22px,2.4vw,30px);
+  line-height: 1.15; letter-spacing: -.02em; margin: 12px 0; }
+.edu-degree-note { color: var(--text-2); font-size: 13px; line-height: 1.6; margin-top: 18px; }
+.cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (max-width: 600px){ .cert-grid{ grid-template-columns: 1fr; } }
+.cert-card { padding: 18px 20px; border: 1px solid var(--border); border-radius: 12px;
+  display: flex; flex-direction: column; gap: 6px; transition: border-color .3s var(--ease), transform .3s var(--ease); }
+.cert-card:hover { border-color: var(--border-strong); transform: translateY(-3px); }
+.cert-card.growth { border-color: var(--border-strong); background: rgba(255,87,34,0.05); }
+.cert-year { font-family: var(--font-mono); font-size: 9px; color: var(--accent); letter-spacing: .15em; }
+.cert-title { font-family: var(--font-display); font-weight: 500; font-size: 14px; line-height: 1.3; letter-spacing: -.01em; }
+.cert-org { font-family: var(--font-mono); font-size: 9px; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; }
+.cert-badge { font-family: var(--font-mono); font-size: 8px; color: #000; background: var(--accent);
+  padding: 3px 8px; border-radius: 999px; letter-spacing: .12em; text-transform: uppercase; align-self: flex-start; margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -980,16 +1079,17 @@ body.modal-open { overflow: hidden; }
     <div class="brand-mark">JB</div>
     <div class="brand-text">
       Julián Barreto
-      <small>Performance Marketing</small>
+      <small>Performance & Growth</small>
     </div>
   </div>
 
   <ul class="nav-list">
     <li class="nav-item"><a href="#hero" class="nav-link" data-section="hero"><span class="num">01</span><span class="label">Inicio</span></a></li>
     <li class="nav-item"><a href="#about" class="nav-link" data-section="about"><span class="num">02</span><span class="label">Sobre mí</span></a></li>
-    <li class="nav-item"><a href="#experience" class="nav-link" data-section="experience"><span class="num">03</span><span class="label">Trayectoria</span></a></li>
+    <li class="nav-item"><a href="#experience" class="nav-link" data-section="experience"><span class="num">03</span><span class="label">Casos</span></a></li>
     <li class="nav-item"><a href="#stack" class="nav-link" data-section="stack"><span class="num">04</span><span class="label">Stack</span></a></li>
-    <li class="nav-item"><a href="#contact" class="nav-link" data-section="contact"><span class="num">05</span><span class="label">Contacto</span></a></li>
+    <li class="nav-item"><a href="#education" class="nav-link" data-section="education"><span class="num">05</span><span class="label">Formación</span></a></li>
+    <li class="nav-item"><a href="#contact" class="nav-link" data-section="contact"><span class="num">06</span><span class="label">Contacto</span></a></li>
   </ul>
 
   <div class="nav-footer">
@@ -1007,12 +1107,12 @@ body.modal-open { overflow: hidden; }
       <div>
         <h1 class="hero-title">
           <span class="line"><span class="line-inner">Performance</span></span>
-          <span class="line"><span class="line-inner">Marketing</span></span>
-          <span class="line"><span class="line-inner"><span class="accent">Manager</span></span></span>
+          <span class="line"><span class="line-inner">Marketing &amp;</span></span>
+          <span class="line"><span class="line-inner"><span class="accent">Growth</span></span></span>
         </h1>
 
         <p class="hero-sub">
-          Soy <strong>Julián Barreto</strong>. Diseño sistemas de adquisición y revenue para negocios B2B y high-ticket. Conecto paid media, automatización y CRM en una sola infraestructura de crecimiento.
+          Soy <strong>Julián Barreto</strong>. Convierto presupuesto en revenue medible: sistemas de adquisición que conectan <strong>paid media, automatización y CRM</strong> en una sola infraestructura de crecimiento. +4 años escalando negocios B2B y high-ticket en <strong>USA, Puerto Rico y LATAM</strong> — hoy enfocado en growth.
         </p>
 
         <div class="hero-actions">
@@ -1053,50 +1153,13 @@ body.modal-open { overflow: hidden; }
     <div class="section-tag reveal">02 / Sobre mí</div>
     <h2 class="section-title reveal reveal-delay-1">
       No prendo campañas.<br>
-      <span class="accent">Construyo sistemas.</span>
+      <span class="accent">Construyo crecimiento.</span>
     </h2>
     <p class="section-intro reveal reveal-delay-1">
-      Selecciona un área para conocer cómo trabajo.
+      Pienso en sistemas, no en campañas sueltas — cada palanca conectada al revenue. Selecciona un área para ver cómo trabajo.
     </p>
 
-    <div class="about-split reveal reveal-delay-2">
-      <ul class="about-list" id="aboutList">
-        <li class="about-list-item active" data-skill="01">
-          <span class="about-list-num">/ 01</span>
-          <span class="about-list-name">Estrategia de Revenue</span>
-          <span class="about-list-arrow">→</span>
-        </li>
-        <li class="about-list-item" data-skill="02">
-          <span class="about-list-num">/ 02</span>
-          <span class="about-list-name">Demanda B2B</span>
-          <span class="about-list-arrow">→</span>
-        </li>
-        <li class="about-list-item" data-skill="03">
-          <span class="about-list-num">/ 03</span>
-          <span class="about-list-name">CRM & Automatización</span>
-          <span class="about-list-arrow">→</span>
-        </li>
-        <li class="about-list-item" data-skill="04">
-          <span class="about-list-num">/ 04</span>
-          <span class="about-list-name">Marketing × Ventas</span>
-          <span class="about-list-arrow">→</span>
-        </li>
-        <li class="about-list-item" data-skill="05">
-          <span class="about-list-num">/ 05</span>
-          <span class="about-list-name">Analítica & Atribución</span>
-          <span class="about-list-arrow">→</span>
-        </li>
-        <li class="about-list-item" data-skill="06">
-          <span class="about-list-num">/ 06</span>
-          <span class="about-list-name">Optimización de Conversión</span>
-          <span class="about-list-arrow">→</span>
-        </li>
-      </ul>
-
-      <div class="about-detail" id="aboutDetail">
-        <!-- Contenido dinámico -->
-      </div>
-    </div>
+    <div class="accordion reveal reveal-delay-2" id="aboutAccordion"></div>
   </section>
 
   <!-- EXPERIENCE -->
@@ -1118,9 +1181,9 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3 class="exp-card-company">Windmar Home</h3>
         <div class="exp-card-role">Performance Marketing Manager · USA & PR</div>
-        <div class="exp-card-highlight">
-          <span class="exp-card-highlight-label">Revenue / mes</span>
-          <span class="exp-card-highlight-value">$80K USD</span>
+                <div class="exp-card-stats">
+          <div class="exp-card-stat"><span class="exp-card-stat-value">−60%</span><span class="exp-card-stat-label">CAC</span></div>
+          <div class="exp-card-stat"><span class="exp-card-stat-value">$80K</span><span class="exp-card-stat-label">Revenue / mes</span></div>
         </div>
         <div class="exp-card-cue">Ver caso completo →</div>
       </article>
@@ -1131,10 +1194,10 @@ body.modal-open { overflow: hidden; }
           <span class="exp-card-arrow">↗</span>
         </div>
         <h3 class="exp-card-company">Royal Media Group</h3>
-        <div class="exp-card-role">Performance & Acquisition Strategist</div>
-        <div class="exp-card-highlight">
-          <span class="exp-card-highlight-label">ROAS</span>
-          <span class="exp-card-highlight-value">3 – 6×</span>
+        <div class="exp-card-role">Responsable de Estrategias Digitales</div>
+                <div class="exp-card-stats">
+          <div class="exp-card-stat"><span class="exp-card-stat-value">3–6×</span><span class="exp-card-stat-label">ROAS</span></div>
+          <div class="exp-card-stat"><span class="exp-card-stat-value">$30M</span><span class="exp-card-stat-label">Revenue / mes</span></div>
         </div>
         <div class="exp-card-cue">Ver caso completo →</div>
       </article>
@@ -1146,9 +1209,9 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3 class="exp-card-company">MoveMinds</h3>
         <div class="exp-card-role">Performance Marketing Lead · B2B</div>
-        <div class="exp-card-highlight">
-          <span class="exp-card-highlight-label">CPA cita</span>
-          <span class="exp-card-highlight-value">$500 → $200</span>
+                <div class="exp-card-stats">
+          <div class="exp-card-stat"><span class="exp-card-stat-value">$200</span><span class="exp-card-stat-label">CPA / cita</span></div>
+          <div class="exp-card-stat"><span class="exp-card-stat-value">7×</span><span class="exp-card-stat-label">ROAS</span></div>
         </div>
         <div class="exp-card-cue">Ver caso completo →</div>
       </article>
@@ -1160,9 +1223,23 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3 class="exp-card-company">Mercatus 9</h3>
         <div class="exp-card-role">Performance Marketing Specialist</div>
-        <div class="exp-card-highlight">
-          <span class="exp-card-highlight-label">Reducción CPA</span>
-          <span class="exp-card-highlight-value">−50–60%</span>
+                <div class="exp-card-stats">
+          <div class="exp-card-stat"><span class="exp-card-stat-value">−60%</span><span class="exp-card-stat-label">CPA</span></div>
+          <div class="exp-card-stat"><span class="exp-card-stat-value">2.3×</span><span class="exp-card-stat-label">ROAS</span></div>
+        </div>
+        <div class="exp-card-cue">Ver caso completo →</div>
+      </article>
+
+      <article class="exp-card reveal" data-exp="migente">
+        <div class="exp-card-top">
+          <span class="exp-card-year">2024 · PROYECTO</span>
+          <span class="exp-card-arrow">↗</span>
+        </div>
+        <h3 class="exp-card-company">Premios Mi Gente</h3>
+        <div class="exp-card-role">Estrategia Digital · Mi Gente 3.0</div>
+        <div class="exp-card-stats">
+          <div class="exp-card-stat"><span class="exp-card-stat-value">+30K</span><span class="exp-card-stat-label">Aforo</span></div>
+          <div class="exp-card-stat"><span class="exp-card-stat-value">Royal Films</span><span class="exp-card-stat-label">Alianza</span></div>
         </div>
         <div class="exp-card-cue">Ver caso completo →</div>
       </article>
@@ -1249,9 +1326,87 @@ body.modal-open { overflow: hidden; }
     </div>
   </section>
 
+  <!-- EDUCATION -->
+  <section class="section" id="education">
+    <div class="section-tag reveal">05 / Formación</div>
+    <h2 class="section-title reveal reveal-delay-1">
+      Formación &amp; <span class="accent">certificaciones.</span>
+    </h2>
+    <p class="section-intro reveal reveal-delay-1">
+      Base en comunicación social, especialización continua en data, growth y medición de campañas.
+    </p>
+
+        <div class="cert-wrap reveal reveal-delay-2">
+      <div class="edu-degree">
+        <div class="edu-card-year">2016 — 2021</div>
+        <h3 class="edu-degree-title">Comunicación Social y Medios</h3>
+        <div class="edu-card-org">Universidad Central · Bogotá</div>
+        <p class="edu-degree-note">Base en comunicación y estrategia, sobre la que construí una especialización data-driven en performance, growth e IA aplicada.</p>
+      </div>
+      <div class="cert-grid">
+      <div class="cert-card">
+        <span class="cert-year">dic. 2025</span>
+        <span class="cert-title">Fundamentos del Análisis de Datos</span>
+        <span class="cert-org">Microsoft &amp; LinkedIn</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-year">dic. 2025</span>
+        <span class="cert-title">Planeación y Medición de Campañas Digitales</span>
+        <span class="cert-org">Platzi</span>
+      </div>
+      <div class="cert-card growth">
+        <span class="cert-year">jul. 2025</span>
+        <span class="cert-title">Growth: Marketing y Producto para el Crecimiento</span>
+        <span class="cert-org">Platzi</span>
+        <span class="cert-badge">Growth</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-year">may. 2025</span>
+        <span class="cert-title">IA para Product Discovery &amp; Design</span>
+        <span class="cert-org">Platzi</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-year">dic. 2024</span>
+        <span class="cert-title">Google Data Analytics</span>
+        <span class="cert-org">Google</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-year">dic. 2024</span>
+        <span class="cert-title">Digital Marketing &amp; E-Commerce (Professional)</span>
+        <span class="cert-org">Google</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-year">dic. 2024</span>
+        <span class="cert-title">Inteligencia Artificial y Productividad</span>
+        <span class="cert-org">Google</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-year">may. 2024</span>
+        <span class="cert-title">Inbound Marketing</span>
+        <span class="cert-org">HubSpot Academy</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-year">may. 2023</span>
+        <span class="cert-title">Marketing de Contenidos</span>
+        <span class="cert-org">HubSpot Academy</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-year">abr. 2021</span>
+        <span class="cert-title">Digitaliza tu Negocio con Google</span>
+        <span class="cert-org">Google</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-year">may. 2020</span>
+        <span class="cert-title">Fundamentals of Digital Marketing</span>
+        <span class="cert-org">Google</span>
+      </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section class="section contact" id="contact">
-    <div class="section-tag reveal">05 / Contacto</div>
+    <div class="section-tag reveal">06 / Contacto</div>
     <h2 class="contact-title reveal reveal-delay-1">
       ¿Te interesa conocer<br>
       <span class="accent">más de mi perfil?</span>
@@ -1346,7 +1501,20 @@ body.modal-open { overflow: hidden; }
   </div>
   <div class="modal-body">
     <p id="modalDesc"></p>
+    <div class="case-media" id="modalMedia"></div>
     <div class="modal-metrics" id="modalMetrics"></div>
+    <div class="case-block">
+      <div class="case-block-title">Reto</div>
+      <p class="case-block-text" id="modalReto"></p>
+    </div>
+    <div class="case-block">
+      <div class="case-block-title">Acción</div>
+      <ul class="case-list" id="modalAccion"></ul>
+    </div>
+    <div class="case-block">
+      <div class="case-block-title">Resultado</div>
+      <p class="case-block-text accent-text" id="modalResultado"></p>
+    </div>
     <div>
       <div class="modal-context-title">Contexto · Stack · Mercado</div>
       <div class="modal-tags" id="modalTags"></div>
@@ -1488,30 +1656,52 @@ const SKILLS = {
 };
 
 (() => {
-  const list = document.getElementById('aboutList');
-  const detail = document.getElementById('aboutDetail');
-
-  function render(key) {
+  const acc = document.getElementById('aboutAccordion');
+  if (!acc) return;
+  acc.innerHTML = Object.keys(SKILLS).map(key => {
     const s = SKILLS[key];
-    if (!s) return;
-    detail.innerHTML = `
-      <div class="about-detail-num">${s.num}</div>
-      <h3 class="about-detail-title">${s.title}</h3>
-      <p class="about-detail-desc">${s.desc}</p>
-      <div class="about-detail-tags">
-        ${s.tags.map(t => `<span class="about-detail-tag">${t}</span>`).join('')}
-      </div>
-    `;
+    const num = s.num.split('—')[0].trim();
+    return `
+      <div class="acc-item" data-skill="${key}">
+        <button class="acc-head" type="button" aria-expanded="false">
+          <span class="acc-num">${num}</span>
+          <span class="acc-name">${s.title}</span>
+          <span class="acc-icon"></span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <p class="acc-desc">${s.desc}</p>
+            <div class="acc-tags">${s.tags.map(t => `<span class="acc-tag">${t}</span>`).join('')}</div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  const items = Array.from(acc.querySelectorAll('.acc-item'));
+  function set(item, open) {
+    const head = item.querySelector('.acc-head');
+    const panel = item.querySelector('.acc-panel');
+    if (open) {
+      item.classList.add('open');
+      head.setAttribute('aria-expanded', 'true');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    } else {
+      item.classList.remove('open');
+      head.setAttribute('aria-expanded', 'false');
+      panel.style.maxHeight = '0px';
+    }
   }
-
-  render('01');
-
-  list.addEventListener('click', (e) => {
-    const item = e.target.closest('.about-list-item');
-    if (!item) return;
-    list.querySelectorAll('.about-list-item').forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
-    render(item.dataset.skill);
+  items.forEach(item => {
+    item.querySelector('.acc-head').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      items.forEach(i => { if (i !== item) set(i, false); });
+      set(item, !isOpen);
+    });
+  });
+  set(items[0], true);
+  window.addEventListener('resize', () => {
+    const o = acc.querySelector('.acc-item.open');
+    if (o) o.querySelector('.acc-panel').style.maxHeight = o.querySelector('.acc-panel').scrollHeight + 'px';
   });
 })();
 
@@ -1521,53 +1711,110 @@ const EXPERIENCES = {
     tag: 'CASE STUDY · 2025 — ACTUAL',
     title: 'Windmar Home',
     role: 'Performance Marketing Manager · USA & Puerto Rico',
-    desc: 'Estrategia de adquisición digital para servicios high-ticket de energía solar residencial en USA. Rediseño completo del funnel reduciendo fricción entre marketing y ventas mediante automatización, validación de leads y optimización del proceso comercial. Ticket promedio entre $5K–$7K USD por venta.',
+    desc: 'Adquisición digital para servicios high-ticket de energía solar residencial en USA y Puerto Rico, con un ticket promedio de $5K–$7K USD por venta.',
+    image: null,
+    mediaNote: 'Espacio para captura de campaña o dashboard de Windmar (Google Ads / Meta).',
     metrics: [
       ['Presupuesto', '$30K–$40K / mes'],
       ['Reducción CAC', '−60% ($400 → $80–$180)'],
       ['Revenue atribuible', '$60K–$80K / mes'],
       ['Leads / mes', '200–400']
     ],
-    tags: ['Google Ads', 'Meta Ads', 'Zoho CRM', 'n8n', 'High-Ticket', 'Energía Solar', 'USA']
+    reto: 'CAC alto (~$400) y fricción entre marketing y ventas que frenaba el cierre en un producto de ticket elevado y ciclo de decisión largo.',
+    acciones: [
+      'Rediseño del funnel de adquisición end-to-end en Google Ads y Meta Ads para USA y PR.',
+      'Automatización en Zoho CRM + n8n para enrutamiento y validación de leads en tiempo real.',
+      'Alineación de SLAs y lead scoring entre marketing y ventas antes del traspaso comercial.'
+    ],
+    resultado: 'CAC reducido ~60% ($400 → $80–$180) y $60K–$80K USD/mes de revenue atribuible de forma sostenida.',
+    tags: ['Google Ads', 'Meta Ads', 'Zoho CRM', 'n8n', 'High-Ticket', 'Energía Solar', 'USA & PR']
   },
   royal: {
     tag: 'CASE STUDY · 2024 — 2025',
     title: 'Royal Media Group',
-    role: 'Performance & Acquisition Strategist',
-    desc: 'Diseño de estrategias de adquisición conectadas con procesos comerciales puerta a puerta. Integración de performance marketing con ventas offline para mejorar seguimiento, medición de impacto y conversión real al cierre. Estructuración de medición y análisis de eficiencia comercial.',
+    role: 'Responsable de Estrategias Digitales',
+    desc: 'Estrategias de adquisición conectadas con un proceso comercial puerta a puerta, donde la conversión real ocurría offline.',
+    image: null,
+    mediaNote: 'Espacio para dashboard de atribución o reporte de ventas de Royal Media.',
     metrics: [
       ['Inversión', '$5M COP / mes'],
       ['ROAS', '3× – 6×'],
       ['Revenue / mes', '$15M – $30M COP'],
       ['Modelo', 'Door-to-door + Digital']
     ],
+    reto: 'El cierre ocurría offline (puerta a puerta) y no había forma de medir el impacto real del performance digital sobre la venta.',
+    acciones: [
+      'Conexión del performance marketing con el proceso de ventas offline.',
+      'Estructura de medición y atribución para seguir el lead hasta el cierre.',
+      'Análisis continuo de eficiencia comercial por canal y zona.'
+    ],
+    resultado: 'ROAS sostenido de 3×–6× y $15M–$30M COP/mes de revenue, con medición clara del aporte digital.',
     tags: ['Meta Ads', 'Google Ads', 'Offline Attribution', 'Sales Process', 'LATAM']
   },
   moveminds: {
     tag: 'CASE STUDY · 2023 — 2024',
     title: 'MoveMinds',
     role: 'Performance Marketing Lead · B2B',
-    desc: 'Demand generation y optimización de pipeline para servicios B2B. Diseño de funnels de conversión y nurturing conectando paid media con automatización en Zoho CRM. Incremento sostenido de citas comerciales mensuales optimizando segmentación, automatización y calidad de lead.',
+    desc: 'Demand generation y optimización de pipeline para servicios B2B, conectando paid media con automatización en CRM.',
+    image: null,
+    mediaNote: 'Espacio para captura del funnel o reporte de citas / CPA de MoveMinds.',
     metrics: [
       ['Citas / mes', '4 → 10'],
       ['CPA por cita', '$500 → $200 USD'],
       ['ROAS', '5× – 7×'],
       ['Revenue / mes', '$11K – $15K USD']
     ],
+    reto: 'Pocas citas calificadas al mes y un CPA por cita demasiado alto ($500) para sostener el crecimiento.',
+    acciones: [
+      'Demand gen en Google Ads, Meta Ads y LinkedIn Ads con foco en intención comercial.',
+      'Funnels de conversión + nurturing conectados a Zoho CRM.',
+      'Optimización de segmentación, automatización y calidad de lead.'
+    ],
+    resultado: 'Citas mensuales de 4 → 10, CPA por cita de $500 → $200 USD y ROAS de 5×–7×.',
     tags: ['Google Ads', 'Meta Ads', 'LinkedIn Ads', 'Zoho CRM', 'B2B', 'Demand Gen']
   },
   mercatus: {
-    tag: 'CASE STUDY · 2022 — 2023',
+    tag: 'CASE STUDY · MERCATUS 9',
     title: 'Mercatus 9',
     role: 'Performance Marketing Specialist',
-    desc: 'Iniciativas de performance marketing y optimización de adquisición para ecommerce y generación de leads. Gestión de campañas multi-plataforma con foco en escalabilidad. Participación en procesos de análisis de conversión y optimización.',
+    desc: 'Performance marketing y optimización de adquisición para ecommerce y generación de leads, con foco en escalabilidad.',
+    image: null,
+    mediaNote: 'Espacio para captura de campañas o reporte de CPA de Mercatus 9.',
     metrics: [
       ['Reducción CPA', '50% – 60%'],
       ['Inversión', '$2M – $3M COP / mes'],
       ['ROAS', '2× – 2.3×'],
       ['Revenue / mes', '$4M – $7M COP']
     ],
+    reto: 'CPA elevado y poca escalabilidad en campañas multi-plataforma de ecommerce y lead gen.',
+    acciones: [
+      'Gestión de campañas multi-plataforma (Meta y Google) con foco en escalar.',
+      'Análisis de conversión y optimización iterativa de creativos y pujas.'
+    ],
+    resultado: 'Reducción de CPA del 50%–60% manteniendo un ROAS de 2×–2.3×.',
     tags: ['Meta Ads', 'Google Ads', 'Ecommerce', 'Lead Gen', 'LATAM']
+  },
+  migente: {
+    tag: 'PROYECTO DESTACADO · 2024',
+    title: 'Premios Mi Gente 2024',
+    role: 'Estrategia Comunicativa y Digital · Mi Gente 3.0',
+    desc: 'Liderazgo de la estrategia comunicativa y digital de los Premios Mi Gente 2024, un evento de alto impacto.',
+    image: null,
+    mediaNote: 'Espacio para foto del evento o métricas de alcance / comunidad de Mi Gente.',
+    metrics: [
+      ['Aforo del evento', '+30.000 personas'],
+      ['Alianza clave', 'Royal Films'],
+      ['Canales', 'Digital + Tradicional'],
+      ['Foco', 'Comunidad + Reach']
+    ],
+    reto: 'Llenar un evento de alto impacto y consolidar una comunidad activa, combinando medios digitales y tradicionales.',
+    acciones: [
+      'Campañas integradas en medios digitales y tradicionales para maximizar visibilidad y asistencia.',
+      'Producción de contenido audiovisual pre y post-evento para reforzar el posicionamiento de marca.',
+      'Alianzas con medios clave, incluyendo Royal Films, para amplificar el alcance.'
+    ],
+    resultado: 'Aforo de +30.000 personas y una comunidad consolidada y fiel en las plataformas de Mi Gente 3.0.',
+    tags: ['Brand', 'Community', 'Contenido', 'Medios', 'Eventos', 'LATAM']
   }
 };
 
@@ -1583,17 +1830,29 @@ const EXPERIENCES = {
     document.getElementById('modalTitle').textContent = e.title;
     document.getElementById('modalRole').textContent = e.role;
     document.getElementById('modalDesc').textContent = e.desc;
+    const media = document.getElementById('modalMedia');
+    if (e.image) {
+      media.classList.remove('empty');
+      media.innerHTML = `<img src="${e.image}" alt="${e.title}" class="case-media-img" />` + (e.mediaNote ? `<div class="case-media-cap">${e.mediaNote}</div>` : '');
+    } else {
+      media.classList.add('empty');
+      media.innerHTML = `<div class="case-media-ph"><span class="case-media-ph-icon">▣</span><span>${e.mediaNote || 'Espacio para captura de campaña / dashboard'}</span></div>`;
+    }
     document.getElementById('modalMetrics').innerHTML = e.metrics.map(([l, v]) => `
       <div class="modal-metric">
         <div class="modal-metric-label">${l}</div>
         <div class="modal-metric-value">${v}</div>
       </div>
     `).join('');
+    document.getElementById('modalReto').textContent = e.reto;
+    document.getElementById('modalAccion').innerHTML = e.acciones.map(a => `<li>${a}</li>`).join('');
+    document.getElementById('modalResultado').textContent = e.resultado;
     document.getElementById('modalTags').innerHTML = e.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
     modal.classList.add('open');
     backdrop.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
+    modal.querySelector('.modal-body').scrollTop = 0;
   }
 
   function close() {
