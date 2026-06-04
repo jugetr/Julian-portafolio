@@ -1063,6 +1063,20 @@ body.modal-open { overflow: hidden; }
 .cert-org { font-family: var(--font-mono); font-size: 9px; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; }
 .cert-badge { font-family: var(--font-mono); font-size: 8px; color: #000; background: var(--accent);
   padding: 3px 8px; border-radius: 999px; letter-spacing: .12em; text-transform: uppercase; align-self: flex-start; margin-top: 4px; }
+
+/* ===== CASE RESULT CHARTS ===== */
+.case-chart { border: 1px solid var(--border); border-radius: 12px; padding: 24px 26px; background: rgba(255,255,255,0.015); }
+.case-chart-title { font-family: var(--font-mono); font-size: 10px; color: var(--text-3); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 22px; }
+.case-bars { display: flex; flex-direction: column; gap: 16px; }
+.case-bar-row { display: grid; grid-template-columns: 112px 1fr auto; align-items: center; gap: 14px; }
+.case-bar-label { font-family: var(--font-mono); font-size: 10px; color: var(--text-2); letter-spacing: .06em; }
+.case-bar-track { height: 12px; background: rgba(255,255,255,0.05); border-radius: 999px; overflow: hidden; }
+.case-bar-fill { height: 100%; width: 0; border-radius: 999px; transition: width .9s var(--ease); }
+.case-bar-fill.accent { background: linear-gradient(90deg, var(--accent-2), var(--accent)); box-shadow: 0 0 12px var(--accent-glow); }
+.case-bar-fill.muted { background: var(--text-3); opacity: .55; }
+.case-bar-val { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -.01em; min-width: 66px; text-align: right; }
+.case-chart-cap { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: .04em; }
+@media (max-width: 600px){ .case-bar-row { grid-template-columns: 80px 1fr auto; gap: 10px; } .case-bar-val{ min-width: 50px; font-size: 13px; } }
 </style>
 </head>
 <body>
@@ -1712,8 +1726,14 @@ const EXPERIENCES = {
     title: 'Windmar Home',
     role: 'Performance Marketing Manager · USA & Puerto Rico',
     desc: 'Adquisición digital para servicios high-ticket de energía solar residencial en USA y Puerto Rico, con un ticket promedio de $5K–$7K USD por venta.',
-    image: null,
-    mediaNote: 'Espacio para captura de campaña o dashboard de Windmar (Google Ads / Meta).',
+    chart: {
+      title: 'Reducción de CAC',
+      cap: '↓ −60% en el costo de adquisición por cliente',
+      bars: [
+        { label: 'CAC antes', value: 400, display: '$400', tone: 'muted' },
+        { label: 'CAC después', value: 130, display: '$80–180', tone: 'accent' }
+      ]
+    },
     metrics: [
       ['Presupuesto', '$30K–$40K / mes'],
       ['Reducción CAC', '−60% ($400 → $80–$180)'],
@@ -1734,8 +1754,14 @@ const EXPERIENCES = {
     title: 'Royal Media Group',
     role: 'Responsable de Estrategias Digitales',
     desc: 'Estrategias de adquisición conectadas con un proceso comercial puerta a puerta, donde la conversión real ocurría offline.',
-    image: null,
-    mediaNote: 'Espacio para dashboard de atribución o reporte de ventas de Royal Media.',
+    chart: {
+      title: 'ROAS sostenido',
+      cap: 'ROAS de 3× a 6× con atribución de ventas offline',
+      bars: [
+        { label: 'ROAS mín', value: 3, display: '3×', tone: 'accent' },
+        { label: 'ROAS máx', value: 6, display: '6×', tone: 'accent' }
+      ]
+    },
     metrics: [
       ['Inversión', '$5M COP / mes'],
       ['ROAS', '3× – 6×'],
@@ -1756,8 +1782,14 @@ const EXPERIENCES = {
     title: 'MoveMinds',
     role: 'Performance Marketing Lead · B2B',
     desc: 'Demand generation y optimización de pipeline para servicios B2B, conectando paid media con automatización en CRM.',
-    image: null,
-    mediaNote: 'Espacio para captura del funnel o reporte de citas / CPA de MoveMinds.',
+    chart: {
+      title: 'Citas calificadas / mes',
+      cap: '↑ +150% citas · CPA por cita $500 → $200',
+      bars: [
+        { label: 'Citas antes', value: 4, display: '4', tone: 'muted' },
+        { label: 'Citas después', value: 10, display: '10', tone: 'accent' }
+      ]
+    },
     metrics: [
       ['Citas / mes', '4 → 10'],
       ['CPA por cita', '$500 → $200 USD'],
@@ -1778,8 +1810,14 @@ const EXPERIENCES = {
     title: 'Mercatus 9',
     role: 'Performance Marketing Specialist',
     desc: 'Performance marketing y optimización de adquisición para ecommerce y generación de leads, con foco en escalabilidad.',
-    image: null,
-    mediaNote: 'Espacio para captura de campañas o reporte de CPA de Mercatus 9.',
+    chart: {
+      title: 'Reducción de CPA',
+      cap: '↓ CPA reducido entre 50% y 60%',
+      bars: [
+        { label: 'CPA antes', value: 100, display: 'Base', tone: 'muted' },
+        { label: 'CPA después', value: 42, display: '−58%', tone: 'accent' }
+      ]
+    },
     metrics: [
       ['Reducción CPA', '50% – 60%'],
       ['Inversión', '$2M – $3M COP / mes'],
@@ -1799,8 +1837,13 @@ const EXPERIENCES = {
     title: 'Premios Mi Gente 2024',
     role: 'Estrategia Comunicativa y Digital · Mi Gente 3.0',
     desc: 'Liderazgo de la estrategia comunicativa y digital de los Premios Mi Gente 2024, un evento de alto impacto.',
-    image: null,
-    mediaNote: 'Espacio para foto del evento o métricas de alcance / comunidad de Mi Gente.',
+    chart: {
+      title: 'Alcance del evento',
+      cap: 'Aforo de +30.000 personas · alianza con Royal Films',
+      bars: [
+        { label: 'Asistentes', value: 30, display: '+30K', tone: 'accent' }
+      ]
+    },
     metrics: [
       ['Aforo del evento', '+30.000 personas'],
       ['Alianza clave', 'Royal Films'],
@@ -1831,12 +1874,26 @@ const EXPERIENCES = {
     document.getElementById('modalRole').textContent = e.role;
     document.getElementById('modalDesc').textContent = e.desc;
     const media = document.getElementById('modalMedia');
-    if (e.image) {
-      media.classList.remove('empty');
-      media.innerHTML = `<img src="${e.image}" alt="${e.title}" class="case-media-img" />` + (e.mediaNote ? `<div class="case-media-cap">${e.mediaNote}</div>` : '');
+    if (e.chart) {
+      const max = Math.max.apply(null, e.chart.bars.map(b => b.value));
+      const rows = e.chart.bars.map(b => {
+        const w = Math.max(8, Math.round(b.value / max * 100));
+        return `<div class="case-bar-row">
+            <span class="case-bar-label">${b.label}</span>
+            <div class="case-bar-track"><div class="case-bar-fill ${b.tone || 'accent'}" data-w="${w}" style="width:0%"></div></div>
+            <span class="case-bar-val">${b.display}</span>
+          </div>`;
+      }).join('');
+      media.innerHTML = `<div class="case-chart">
+          <div class="case-chart-title">${e.chart.title}</div>
+          <div class="case-bars">${rows}</div>
+          <div class="case-chart-cap">${e.chart.cap}</div>
+        </div>`;
+      requestAnimationFrame(() => {
+        media.querySelectorAll('.case-bar-fill').forEach(f => { f.style.width = f.dataset.w + '%'; });
+      });
     } else {
-      media.classList.add('empty');
-      media.innerHTML = `<div class="case-media-ph"><span class="case-media-ph-icon">▣</span><span>${e.mediaNote || 'Espacio para captura de campaña / dashboard'}</span></div>`;
+      media.innerHTML = '';
     }
     document.getElementById('modalMetrics').innerHTML = e.metrics.map(([l, v]) => `
       <div class="modal-metric">
