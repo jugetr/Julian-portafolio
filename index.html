@@ -247,10 +247,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .section > .about-cards,
 .section > .about-metrics,
 .section > .about-formula,
-.section > .exp-slider,
+.section > .cases,
 .section > .edu-grid,
-.section > .cert-wrap,
-.section > .stack-grid,
+.section > .fm,
+.section > .stack-head,
+.section > .st,
 .section > .contact-title,
 .section > .contact-sub,
 .section > .contact-channels,
@@ -1332,6 +1333,493 @@ body.modal-open { overflow: hidden; }
 }
 
 
+/* ===== FORMACIÓN - 3 TARJETAS DESPLEGABLES ===== */
+.fm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: start; }
+@media (max-width: 900px) { .fm { grid-template-columns: 1fr; } }
+
+.fm-card {
+  border-radius: 16px; border: 1px solid var(--border-neutral);
+  background: rgba(255,255,255,0.022); overflow: hidden;
+  transition: border-color 0.35s var(--ease), background 0.35s var(--ease);
+}
+.fm-card:hover { border-color: rgba(250,118,1,0.35); }
+.fm-card.open { border-color: rgba(250,118,1,0.45); background: rgba(250,118,1,0.05); }
+
+.fm-head {
+  position: relative; width: 100%; text-align: left;
+  display: flex; flex-direction: column; gap: 7px;
+  padding: 24px 52px 24px 26px;
+}
+.fm-kicker {
+  font-family: var(--font-mono); font-size: 9.5px; color: var(--accent);
+  letter-spacing: 0.18em; text-transform: uppercase;
+}
+.fm-title {
+  font-family: var(--font-display); font-size: 19px; font-weight: 600;
+  color: var(--text); letter-spacing: -0.02em; line-height: 1.25;
+}
+.fm-meta { font-family: var(--font-mono); font-size: 10px; color: var(--text-3); letter-spacing: 0.1em; }
+
+/* Signo + que gira a x al abrir */
+.fm-toggle { position: absolute; top: 26px; right: 24px; width: 14px; height: 14px; }
+.fm-toggle::before, .fm-toggle::after {
+  content: ''; position: absolute; background: var(--text-3);
+  transition: transform 0.4s var(--ease), background 0.3s var(--ease);
+}
+.fm-toggle::before { top: 50%; left: 0; width: 100%; height: 1.5px; margin-top: -0.75px; }
+.fm-toggle::after  { left: 50%; top: 0; height: 100%; width: 1.5px; margin-left: -0.75px; }
+.fm-card.open .fm-toggle::before { background: var(--accent); transform: rotate(180deg); }
+.fm-card.open .fm-toggle::after  { background: var(--accent); transform: rotate(90deg); }
+.fm-head:hover .fm-toggle::before, .fm-head:hover .fm-toggle::after { background: var(--accent); }
+
+.fm-body { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--ease); }
+.fm-body-inner { padding: 0 26px 26px; }
+
+.fm-degree {
+  font-family: var(--font-display); font-size: 17px; font-weight: 600;
+  letter-spacing: -0.02em; margin-bottom: 6px;
+}
+.fm-degree-org {
+  font-family: var(--font-mono); font-size: 9.5px; color: var(--text-3);
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px;
+}
+.fm-degree-note { font-size: 14px; color: var(--text-2); line-height: 1.68; margin: 0; }
+
+.fm-list { list-style: none; display: flex; flex-direction: column; }
+.fm-row {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 12px 0; border-top: 1px solid var(--border-neutral);
+}
+.fm-row:first-child { border-top: none; padding-top: 2px; }
+.fm-row-year { font-family: var(--font-mono); font-size: 9.5px; color: var(--accent); letter-spacing: 0.14em; }
+.fm-row-title { font-size: 13.5px; color: var(--text); line-height: 1.4; font-weight: 500; }
+.fm-row-org {
+  font-family: var(--font-mono); font-size: 9.5px; color: var(--text-3);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.fm-row.key .fm-row-title { color: var(--accent); }
+.fm-row-badge {
+  align-self: flex-start; margin-top: 5px;
+  font-family: var(--font-mono); font-size: 8.5px; color: #0a0a0a;
+  background: var(--accent); padding: 3px 8px; border-radius: 999px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+@media (prefers-reduced-motion: reduce) { .fm-body { transition: none; } }
+
+/* ===== GROWTH SYSTEM - PESTAÑAS ===== */
+/* Cabecera con el parrafo al lado del titulo: recupera el hueco muerto */
+.stack-head {
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: 0 64px;
+  align-items: end; margin-bottom: 46px;
+}
+.stack-intro {
+  color: var(--text-2); font-size: 16px; line-height: 1.7;
+  padding-left: 64px; border-left: 1px solid var(--border-neutral); margin: 0 0 8px;
+}
+@media (max-width: 1000px) {
+  .stack-head { grid-template-columns: 1fr; gap: 26px; margin-bottom: 34px; }
+  .stack-intro { padding-left: 0; border-left: none; }
+}
+
+.st-tabs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.st-tab {
+  position: relative; text-align: left; padding: 16px 16px 15px;
+  border-radius: 13px; border: 1px solid var(--border-neutral);
+  background: rgba(255,255,255,0.022);
+  display: flex; flex-direction: column; gap: 5px;
+  transition: all 0.35s var(--ease);
+}
+.st-tab:hover { border-color: rgba(250,118,1,0.35); background: rgba(250,118,1,0.05); }
+.st-tab-num {
+  font-family: var(--font-mono); font-size: 9.5px; color: var(--text-3);
+  letter-spacing: 0.16em;
+}
+.st-tab-name {
+  font-family: var(--font-display); font-size: 14.5px; font-weight: 600;
+  color: var(--text-2); letter-spacing: -0.01em; line-height: 1.25;
+}
+.st-tab-count {
+  position: absolute; top: 14px; right: 15px;
+  font-family: var(--font-mono); font-size: 9.5px; color: var(--text-3);
+}
+.st-tab.active {
+  border-color: rgba(250,118,1,0.5); background: rgba(250,118,1,0.09);
+  box-shadow: 0 12px 30px -14px rgba(250,118,1,0.45);
+}
+.st-tab.active .st-tab-num,
+.st-tab.active .st-tab-count { color: var(--accent); }
+.st-tab.active .st-tab-name { color: var(--text); }
+
+.st-panels { position: relative; margin-top: 16px; }
+.st-panel {
+  display: none; flex-wrap: wrap; gap: 10px;
+  padding: 24px 26px; border-radius: 15px;
+  border: 1px solid var(--border-neutral); background: rgba(255,255,255,0.018);
+}
+.st-panel.active { display: flex; animation: stIn 0.4s var(--ease) both; }
+@keyframes stIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.st-chip {
+  font-family: var(--font-mono); font-size: 11px; color: var(--text-2);
+  padding: 9px 15px; border-radius: 999px;
+  background: rgba(255,255,255,0.035); border: 1px solid var(--border);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 1100px) { .st-tabs { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 620px)  { .st-tabs { grid-template-columns: repeat(2, 1fr); } .st-tab-count { display: none; } }
+@media (prefers-reduced-motion: reduce) { .st-panel.active { animation: none; } }
+
+/* ===== CASOS - TARJETAS EXPANDIBLES ===== */
+.cases {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  margin-top: 10px; align-items: flex-start;
+}
+
+.case {
+  position: relative; min-width: 0;
+  flex: 1 1 calc(50% - 7px);
+  transition: flex-basis 0.5s var(--ease), border-color 0.5s var(--ease);
+  border-radius: 20px; overflow: hidden;
+  border: 1px solid var(--border-neutral);
+}
+/* Fondo alternado: pares en negro, impares en naranja */
+.case::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 66%, rgba(255,255,255,0.045) 67.5%, transparent 73%),
+    radial-gradient(ellipse 70% 58% at 50% 34%, rgba(250,118,1,0.26), rgba(250,118,1,0.06) 48%, transparent 74%),
+    #080808;
+}
+.case.warm::before {
+  background:
+    radial-gradient(ellipse 78% 92% at 50% 42%, transparent 34%, rgba(92,36,0,0.44) 100%),
+    linear-gradient(180deg, transparent 62%, rgba(120,45,0,0.26) 64.5%, transparent 80%),
+    radial-gradient(ellipse 62% 62% at 50% 34%, #FF9A3D 0%, #FA7601 32%, #DC6100 64%, #B44E01 100%);
+}
+.case.open { flex-basis: 100%; order: -1; border-color: rgba(250,118,1,0.45); }
+
+/* Con una abierta, las 3 cerradas caben en una sola fila y se compactan */
+.cases.has-open .case:not(.open) { flex: 1 1 calc(33.333% - 10px); }
+.cases.has-open .case:not(.open) .case-head { padding: 20px 18px 18px; gap: 9px; }
+.cases.has-open .case:not(.open) .case-logo-box { height: 74px; }
+.cases.has-open .case:not(.open) .case-logo { max-width: 170px; max-height: 64px; }
+.cases.has-open .case:not(.open) .case-role { font-size: 13px; }
+.case.warm.open { border-color: rgba(255,255,255,0.28); }
+.case-head { cursor: pointer; }
+.case:not(.open):hover { border-color: rgba(250,118,1,0.4); }
+
+/* Cabecera: logo + cargo + anio (siempre visible) */
+.case-head {
+  position: relative; z-index: 1; width: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; padding: 26px 22px 22px; text-align: center;
+}
+.case-logo-box { height: 106px; display: flex; align-items: center; justify-content: center; }
+.case-logo {
+  max-width: 240px; max-height: 100px; width: auto; height: auto; object-fit: contain;
+  filter: drop-shadow(0 6px 24px rgba(250,118,1,0.28));
+  transition: max-width 0.6s var(--ease), max-height 0.6s var(--ease);
+}
+.case.warm .case-logo { filter: drop-shadow(0 8px 26px rgba(80,28,0,0.45)); }
+.case.open .case-logo { max-width: 300px; max-height: 124px; }
+.case-role {
+  font-family: var(--font-display); font-size: 15px; font-weight: 600;
+  color: var(--text); letter-spacing: -0.01em; line-height: 1.3;
+  transition: font-size 0.5s var(--ease);
+}
+.case.open .case-role { font-size: clamp(18px, 1.6vw, 23px); }
+.case.warm .case-role { color: #fff; }
+.case-year {
+  font-family: var(--font-mono); font-size: 10px; color: var(--accent);
+  letter-spacing: 0.22em; text-transform: uppercase;
+}
+.case.warm .case-year { color: rgba(255,255,255,0.9); }
+/* Pista de "clic para abrir" en las cerradas */
+.case-cue {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--text-3);
+  opacity: 1; transition: opacity 0.4s var(--ease);
+}
+.case.warm .case-cue { color: rgba(255,255,255,0.65); }
+.case.open .case-cue { color: var(--accent); }
+.case.warm.open .case-cue { color: #fff; }
+
+/* Cuerpo: aparece al abrir */
+.case-body {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr; gap: 22px;
+  padding: 0 36px 30px;
+  opacity: 0; transform: translateY(14px);
+  max-height: 0; overflow: hidden; pointer-events: none;
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+.case.open .case-body {
+  opacity: 1; transform: none; max-height: 900px; pointer-events: auto;
+  transition: opacity 0.5s var(--ease) 0.22s, transform 0.5s var(--ease) 0.22s;
+}
+.case-label {
+  display: inline-flex; align-items: center; gap: 9px; margin-bottom: 9px;
+  font-family: var(--font-mono); font-size: 10px; color: var(--accent);
+  letter-spacing: 0.22em; text-transform: uppercase;
+}
+.case-label::before { content: ''; width: 16px; height: 1px; background: currentColor; opacity: 0.7; }
+.case.warm .case-label { color: rgba(255,255,255,0.85); }
+.case-text { font-size: 14px; color: var(--text-2); line-height: 1.66; margin: 0 0 18px; max-width: 92ch; }
+.case-text.strong { color: var(--text); font-weight: 500; margin-bottom: 26px; }
+.case.warm .case-text { color: rgba(255,255,255,0.9); }
+.case.warm .case-text.strong { color: #fff; }
+
+.case-nums { list-style: none; display: flex; flex-direction: row; }
+.case-nums li {
+  flex: 1; padding: 2px 24px; text-align: left;
+  border-left: 1px solid var(--border-neutral);
+}
+.case-nums li:first-child { border-left: none; padding-left: 0; }
+.case.warm .case-nums li { border-left-color: rgba(255,255,255,0.22); }
+.case-nums .v {
+  display: block; font-family: var(--font-display); font-size: 20px; font-weight: 700;
+  color: var(--text); letter-spacing: -0.025em; line-height: 1.15;
+}
+.case-nums .k {
+  display: block; font-family: var(--font-mono); font-size: 9.5px; color: var(--text-3);
+  margin-top: 5px; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.case.warm .case-nums .v { color: #fff; }
+.case.warm .case-nums .k { color: rgba(255,255,255,0.72); }
+
+.case-cta {
+  grid-column: 1 / -1; justify-self: start;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 24px; border-radius: 999px;
+  border: 1.5px solid var(--accent); color: var(--accent);
+  font-family: var(--font-body); font-size: 13.5px; font-weight: 600;
+  transition: all 0.3s var(--ease);
+}
+.case-cta .arrow { transition: transform 0.3s var(--ease); }
+.case-cta:hover { background: var(--accent); color: #0a0a0a; box-shadow: 0 0 26px rgba(250,118,1,0.4); }
+.case-cta:hover .arrow { transform: translateX(4px); }
+.case.warm .case-cta { border-color: rgba(255,255,255,0.9); color: #fff; }
+.case.warm .case-cta:hover { background: #fff; color: #B44E01; box-shadow: 0 0 26px rgba(255,255,255,0.35); }
+
+/* Apilado en pantallas medianas: acordeon vertical */
+@media (max-width: 1150px) {
+  .case, .case.open, .cases.has-open .case:not(.open) { flex: 1 1 100%; }
+  .case-head { padding: 28px 24px 24px; }
+  .case-logo-box { height: 92px; }
+  .case-logo, .case.open .case-logo { max-width: 200px; max-height: 84px; }
+  .case-body { gap: 20px; padding: 0 28px 30px; }
+  .case-nums { flex-direction: column; }
+  .case-nums li { padding: 9px 0; border-left: none; border-top: 1px solid var(--border-neutral); }
+  .case-nums li:first-child { border-top: none; }
+  .case.open .case-body { max-height: 1200px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .case, .case-body, .case-logo, .case-role { transition: none !important; }
+}
+
+/* ===== SOBRE MÍ ===== */
+
+/* Etiqueta "02 | Sobre mí" — variante con número y divisor */
+.section-tag.split { gap: 0; }
+.section-tag.split::before { display: none; }
+.section-tag.split .num {
+  font-family: var(--font-display); font-size: 22px; font-weight: 700;
+  color: var(--accent); letter-spacing: -0.02em; text-transform: none;
+}
+.section-tag.split .label {
+  margin-left: 18px; padding-left: 18px;
+  border-left: 1px solid var(--border-strong);
+  color: var(--text-2); letter-spacing: 0.22em;
+}
+
+/* Fondo negro en lugar del gris que trae por ser sección par */
+#about { background: var(--bg); }
+
+#about .section-title { max-width: 18ch; margin-bottom: 0; }
+
+/* Cabecera a dos columnas separadas por una línea */
+.about-head {
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: 0 64px;
+  align-items: stretch; margin-bottom: 64px;
+}
+/* stretch + borde neutro: el divisor recorre toda la altura de la cabecera */
+.about-head-aside {
+  padding-left: 64px; border-left: 1px solid var(--border-neutral);
+  padding-top: 6px;
+}
+.about-head-aside p { color: var(--text-2); font-size: 16px; line-height: 1.7; }
+.about-head-aside p + p { margin-top: 24px; }
+.about-head-aside strong { color: var(--text); font-weight: 600; }
+
+.about-rule {
+  display: block; width: 84px; height: 3px; border-radius: 2px;
+  background: var(--accent); margin: 28px 0 0;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+@media (max-width: 1000px) {
+  .about-head { grid-template-columns: 1fr; gap: 40px; margin-bottom: 48px; }
+  .about-head-aside { padding-left: 0; border-left: none; padding-top: 0; }
+}
+
+/* Tres tarjetas */
+.about-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px;
+}
+@media (max-width: 1000px) { .about-cards { grid-template-columns: 1fr; } }
+
+.about-card {
+  padding: 30px 30px 32px; border-radius: 16px;
+  border: 1px solid var(--border-neutral);
+  background: rgba(255, 255, 255, 0.022);
+  transition: border-color 0.35s var(--ease), background 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.about-card:hover {
+  border-color: rgba(250, 118, 1, 0.45);
+  background: rgba(250, 118, 1, 0.07);
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 55px -14px rgba(250, 118, 1, 0.42),
+    0 0 26px -6px rgba(250, 118, 1, 0.28),
+    inset 0 0 44px -22px rgba(250, 118, 1, 0.65);
+}
+.about-card:hover .about-card-title { color: var(--text); }
+.about-card-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px; border-radius: 13px;
+  border: 1px solid var(--border-strong);
+  background: rgba(250, 118, 1, 0.07);
+  color: var(--accent); margin-bottom: 22px;
+  transition: background 0.35s var(--ease), border-color 0.35s var(--ease),
+              box-shadow 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.about-card:hover .about-card-icon {
+  background: rgba(250, 118, 1, 0.18);
+  border-color: rgba(250, 118, 1, 0.55);
+  box-shadow: 0 0 24px rgba(250, 118, 1, 0.4);
+  transform: translateY(-2px) scale(1.06);
+}
+.about-card-icon svg { width: 25px; height: 25px; }
+.about-card-num {
+  display: block; font-family: var(--font-display); font-size: 15px; font-weight: 700;
+  color: var(--accent); letter-spacing: 0.04em; margin-bottom: 6px;
+}
+.about-card-title {
+  font-family: var(--font-display); font-size: 21px; font-weight: 600;
+  letter-spacing: -0.02em; margin-bottom: 12px;
+}
+.about-card-desc { color: var(--text-2); font-size: 14.5px; line-height: 1.65; }
+
+/* Barra de métricas */
+.about-metrics {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  border: 1px solid var(--border-neutral); border-radius: 16px;
+  background: rgba(255, 255, 255, 0.022);
+  padding: 26px 12px; margin-bottom: 20px;
+}
+.about-metric {
+  display: flex; align-items: center; gap: 15px; padding: 4px 22px;
+  border-left: 1px solid var(--border-neutral);
+}
+.about-metric:first-child { border-left: none; }
+.about-metric-icon { display: flex; color: var(--accent); flex-shrink: 0; }
+.about-metric-icon svg { width: 27px; height: 27px; overflow: visible; }
+
+/* ---- Animación propia por ícono ----
+   Cada pieza usa transform-box: fill-box para que el origen sea la pieza
+   y no el lienzo entero del SVG. Idle sutil en bucle; al pasar el mouse
+   sobre la métrica, la animación se acelera y el ícono brilla. */
+.about-metric-icon svg * { transform-box: fill-box; }
+.about-metric { transition: background 0.3s var(--ease); border-radius: 10px; }
+.about-metric:hover .about-metric-icon { filter: drop-shadow(0 0 8px rgba(250, 118, 1, 0.65)); }
+.about-metric-icon { transition: filter 0.3s var(--ease); }
+
+/* Años — el maletín se balancea y el asa se levanta */
+.m-years .about-metric-icon svg { animation: icoTilt 4.5s ease-in-out infinite; transform-origin: 50% 80%; }
+.m-years .ico-handle { transform-origin: 50% 100%; animation: icoHandle 4.5s ease-in-out infinite; }
+@keyframes icoTilt { 0%, 70%, 100% { transform: rotate(0deg); } 80% { transform: rotate(-7deg); } 90% { transform: rotate(5deg); } }
+@keyframes icoHandle { 0%, 72%, 100% { transform: translateY(0); } 82% { transform: translateY(-1.6px); } }
+.m-years:hover .about-metric-icon svg { animation-duration: 1.2s; }
+
+/* Mercados — el meridiano se comprime y expande: el globo gira */
+.m-markets .ico-meridian { transform-origin: 50% 50%; animation: icoSpin 5s ease-in-out infinite; }
+@keyframes icoSpin { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.12); } }
+.m-markets:hover .ico-meridian { animation-duration: 1.6s; }
+
+/* Presupuesto — las barras crecen en cascada */
+.m-budget .ico-bar { transform-origin: 50% 100%; animation: icoGrow 2.6s ease-in-out infinite; }
+.m-budget .ico-bar:nth-child(1) { animation-delay: 0s; }
+.m-budget .ico-bar:nth-child(2) { animation-delay: 0.14s; }
+.m-budget .ico-bar:nth-child(3) { animation-delay: 0.28s; }
+.m-budget .ico-bar:nth-child(4) { animation-delay: 0.42s; }
+@keyframes icoGrow { 0%, 55%, 100% { transform: scaleY(1); } 25% { transform: scaleY(0.45); } }
+.m-budget:hover .ico-bar { animation-duration: 1s; }
+
+/* CAC — la flecha cae, se desvanece y reaparece arriba */
+.m-cac .ico-arrow { animation: icoDrop 2.4s ease-in-out infinite; }
+@keyframes icoDrop {
+  0%, 55%, 100% { transform: translateY(0); opacity: 1; }
+  30% { transform: translateY(4px); opacity: 0.35; }
+  31% { transform: translateY(-4px); opacity: 0; }
+  45% { transform: translateY(0); opacity: 1; }
+}
+.m-cac:hover .ico-arrow { animation-duration: 0.9s; }
+
+/* ROAS — el cohete despega en diagonal y la llama parpadea */
+.m-roas .ico-rocket { animation: icoLaunch 3.2s ease-in-out infinite; }
+.m-roas .ico-flame { transform-origin: 100% 0%; animation: icoFlame 3.2s ease-in-out infinite; }
+@keyframes icoLaunch { 0%, 60%, 100% { transform: translate(0, 0); } 78% { transform: translate(2.2px, -2.6px); } }
+@keyframes icoFlame { 0%, 60%, 100% { transform: scale(1); opacity: 0.85; } 78% { transform: scale(1.45); opacity: 1; } }
+.m-roas:hover .ico-rocket, .m-roas:hover .ico-flame { animation-duration: 1.1s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .about-metric-icon svg,
+  .about-metric-icon svg * { animation: none !important; transform: none !important; opacity: 1 !important; }
+}
+.about-metric-body { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+.about-metric-body strong {
+  font-family: var(--font-display); font-size: 21px; font-weight: 700;
+  color: var(--text); letter-spacing: -0.025em;
+}
+.about-metric-body span { font-size: 13px; color: var(--text-3); margin-top: 4px; }
+
+@media (max-width: 1150px) {
+  .about-metrics { grid-template-columns: repeat(3, 1fr); gap: 22px 0; }
+  .about-metric:nth-child(3n + 1) { border-left: none; }
+}
+@media (max-width: 700px) {
+  .about-metrics { grid-template-columns: repeat(2, 1fr); }
+  .about-metric:nth-child(3n + 1) { border-left: 1px solid var(--border-neutral); }
+  .about-metric:nth-child(odd) { border-left: none; }
+  .about-metric { padding: 4px 14px; gap: 12px; }
+  .about-metric-body strong { font-size: 18px; }
+  .about-metric-body span { font-size: 12px; }
+}
+
+/* Franja de fórmula */
+.about-formula {
+  display: flex; align-items: center; justify-content: center; gap: 22px;
+  padding: 28px 32px; border-radius: 16px;
+  border: 1px solid var(--border-neutral);
+  background: rgba(250, 118, 1, 0.035);
+  text-align: center;
+}
+.about-formula-mark {
+  font-family: var(--font-mono); font-size: 15px; color: var(--accent); letter-spacing: -0.05em;
+}
+.about-formula-text {
+  font-family: var(--font-mono); font-size: 14px; color: var(--text-2);
+  letter-spacing: 0.24em; text-transform: uppercase;
+}
+.about-formula-text i { color: var(--text-3); font-style: normal; margin: 0 4px; }
+.about-formula-text strong { color: var(--accent); font-weight: 700; }
+
+@media (max-width: 800px) {
+  .about-formula { gap: 14px; padding: 22px 20px; }
+  .about-formula-text { font-size: 11px; letter-spacing: 0.16em; line-height: 2; }
+}
+
+
 /* ===== TRAYECTORIA - SLIDER ===== */
 .exp-slider { margin-top: 8px; }
 .exp-stage {
@@ -1866,203 +2354,122 @@ body.modal-open { overflow: hidden; }
       <span class="accent hi">generan revenue.</span>
     </h2>
 
-    <div class="exp-slider reveal reveal-delay-2" id="expSlider">
-      <div class="exp-stage">
-        <span class="exp-backdrop" aria-hidden="true"></span>
-        <button class="exp-arrow prev" type="button" aria-label="Anterior">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
-        </button>
-        <button class="exp-arrow next" type="button" aria-label="Siguiente">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
-        </button>
-
-        <div class="exp-panel exp-panel-left">
-          <span class="exp-panel-label">El reto</span>
-          <p class="exp-reto"></p>
-          <span class="exp-panel-label">Resultado</span>
-          <p class="exp-resultado"></p>
-        </div>
-
-        <div class="exp-center">
-          <span class="exp-glow" aria-hidden="true"></span>
-          <div class="exp-logo-wrap"><img class="exp-logo" src="" alt="" /></div>
-          <div class="exp-role"></div>
-          <div class="exp-year"></div>
-          <button class="exp-cta" type="button">Ver caso completo <span class="arrow">&#8594;</span></button>
-        </div>
-
-        <div class="exp-panel exp-panel-right">
-          <span class="exp-panel-label">En n&uacute;meros</span>
-          <ul class="exp-metrics"></ul>
-        </div>
-      </div>
-
-      <div class="exp-track" role="tablist" aria-label="Experiencias"></div>
-      <div class="exp-progress"><span class="exp-progress-bar"></span></div>
-    </div>
+    <div class="cases reveal reveal-delay-2" id="cases"></div>
   </section>
 
   <section class="section" id="stack">
-    <div class="section-tag reveal">04 / Stack</div>
-    <h2 class="section-title reveal reveal-delay-1">
-      Cómo pienso,<br><span class="accent">cómo ejecuto.</span>
-    </h2>
-    <p class="section-intro reveal reveal-delay-1">
-      Frameworks estratégicos para diseñar el sistema de crecimiento, y herramientas para ejecutarlo con precisión.
-    </p>
-
-    <div class="stack-grid reveal reveal-delay-2">
-
-      <div class="stack-cell">
-        <div class="stack-cell-num">/ 01</div>
-        <h3>Paid Media</h3>
-        <div class="stack-cell-tags">
-          <span class="stack-cell-tag">Google Ads</span>
-          <span class="stack-cell-tag">Meta Ads</span>
-          <span class="stack-cell-tag">LinkedIn Ads</span>
-          <span class="stack-cell-tag">TikTok Ads</span>
-          <span class="stack-cell-tag">Performance Max</span>
-        </div>
+    <div class="stack-head reveal">
+      <div>
+        <div class="section-tag split"><span class="num">04</span><span class="label">Growth System</span></div>
+        <h2 class="section-title exp-title">
+          <span class="lo">Cómo pienso,</span>
+          <span class="accent hi">cómo ejecuto.</span>
+        </h2>
       </div>
+      <p class="stack-intro">
+        Frameworks estratégicos para diseñar el sistema de crecimiento,
+        y herramientas para ejecutarlo con precisión.
+      </p>
+    </div>
 
-      <div class="stack-cell">
-        <div class="stack-cell-num">/ 02</div>
-        <h3>Analytics</h3>
-        <div class="stack-cell-tags">
-          <span class="stack-cell-tag">GA4</span>
-          <span class="stack-cell-tag">GTM</span>
-          <span class="stack-cell-tag">Looker Studio</span>
-          <span class="stack-cell-tag">Attribution</span>
-        </div>
+    <div class="st reveal reveal-delay-1">
+      <div class="st-tabs" role="tablist" aria-label="Stack">
+          <button class="st-tab active" type="button" role="tab" data-i="0" aria-selected="true"><span class="st-tab-num">01</span><span class="st-tab-name">Paid Media</span><span class="st-tab-count">5</span></button>
+          <button class="st-tab" type="button" role="tab" data-i="1" aria-selected="false"><span class="st-tab-num">02</span><span class="st-tab-name">Analytics</span><span class="st-tab-count">4</span></button>
+          <button class="st-tab" type="button" role="tab" data-i="2" aria-selected="false"><span class="st-tab-num">03</span><span class="st-tab-name">CRM &amp; Automatización</span><span class="st-tab-count">4</span></button>
+          <button class="st-tab" type="button" role="tab" data-i="3" aria-selected="false"><span class="st-tab-num">04</span><span class="st-tab-name">Growth Frameworks</span><span class="st-tab-count">5</span></button>
+          <button class="st-tab" type="button" role="tab" data-i="4" aria-selected="false"><span class="st-tab-num">05</span><span class="st-tab-name">Estrategia &amp; GTM</span><span class="st-tab-count">5</span></button>
+          <button class="st-tab" type="button" role="tab" data-i="5" aria-selected="false"><span class="st-tab-num">06</span><span class="st-tab-name">AI &amp; Productivity</span><span class="st-tab-count">3</span></button>
       </div>
-
-      <div class="stack-cell">
-        <div class="stack-cell-num">/ 03</div>
-        <h3>CRM & Automatización</h3>
-        <div class="stack-cell-tags">
-          <span class="stack-cell-tag">Zoho CRM</span>
-          <span class="stack-cell-tag">HubSpot</span>
-          <span class="stack-cell-tag">n8n</span>
-          <span class="stack-cell-tag">Zapier</span>
-        </div>
+      <div class="st-panels">
+          <div class="st-panel active" role="tabpanel" data-i="0"><span class="st-chip">Google Ads</span><span class="st-chip">Meta Ads</span><span class="st-chip">LinkedIn Ads</span><span class="st-chip">TikTok Ads</span><span class="st-chip">Performance Max</span></div>
+          <div class="st-panel" role="tabpanel" data-i="1"><span class="st-chip">GA4</span><span class="st-chip">GTM</span><span class="st-chip">Looker Studio</span><span class="st-chip">Attribution</span></div>
+          <div class="st-panel" role="tabpanel" data-i="2"><span class="st-chip">Zoho CRM</span><span class="st-chip">HubSpot</span><span class="st-chip">n8n</span><span class="st-chip">Zapier</span></div>
+          <div class="st-panel" role="tabpanel" data-i="3"><span class="st-chip">North Star Metric</span><span class="st-chip">Growth Loops</span><span class="st-chip">ICE / RICE</span><span class="st-chip">Funnel Mapping</span><span class="st-chip">Lead Scoring</span></div>
+          <div class="st-panel" role="tabpanel" data-i="4"><span class="st-chip">Go-to-Market</span><span class="st-chip">Revenue Modeling</span><span class="st-chip">Customer Journey</span><span class="st-chip">A/B Testing</span><span class="st-chip">Bidding Strategy</span></div>
+          <div class="st-panel" role="tabpanel" data-i="5"><span class="st-chip">Claude</span><span class="st-chip">AI Workflows</span><span class="st-chip">Data Analysis</span></div>
       </div>
-
-      <div class="stack-cell">
-        <div class="stack-cell-num">/ 04</div>
-        <h3>Growth Frameworks</h3>
-          <div class="stack-cell-tags">
-            <span class="stack-cell-tag">North Star Metric</span>
-            <span class="stack-cell-tag">Growth Loops</span>
-            <span class="stack-cell-tag">ICE / RICE</span>
-            <span class="stack-cell-tag">Funnel Mapping</span>
-            <span class="stack-cell-tag">Lead Scoring</span>
-          </div>
-        </div>
-
-      <div class="stack-cell">
-        <div class="stack-cell-num">/ 05</div>
-        <h3>Estrategia & GTM</h3>
-          <div class="stack-cell-tags">
-            <span class="stack-cell-tag">Go-to-Market</span>
-            <span class="stack-cell-tag">Revenue Modeling</span>
-            <span class="stack-cell-tag">Customer Journey</span>
-            <span class="stack-cell-tag">A/B Testing</span>
-            <span class="stack-cell-tag">Bidding Strategy</span>
-          </div>
-        </div>
-
-      <div class="stack-cell">
-        <div class="stack-cell-num">/ 06</div>
-        <h3>AI & Productivity</h3>
-        <div class="stack-cell-tags">
-          <span class="stack-cell-tag">Claude</span>
-          <span class="stack-cell-tag">AI Workflows</span>
-          <span class="stack-cell-tag">Data Analysis</span>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- EDUCATION -->
   <section class="section" id="education">
-    <div class="section-tag reveal">05 / Formación</div>
-    <h2 class="section-title reveal reveal-delay-1">
-      Formación &amp; <span class="accent">certificaciones.</span>
-    </h2>
-    <p class="section-intro reveal reveal-delay-1">
-      Base en comunicación social, especialización continua en data, growth y medición de campañas.
-    </p>
+    <div class="stack-head reveal">
+      <div>
+        <div class="section-tag split"><span class="num">05</span><span class="label">Formación</span></div>
+        <h2 class="section-title exp-title">
+          <span class="lo">Formación &amp;</span>
+          <span class="accent hi">certificaciones.</span>
+        </h2>
+      </div>
+      <p class="stack-intro">
+        Base en comunicación social, especialización continua en data, growth
+        y medición de campañas.
+      </p>
+    </div>
 
-        <div class="cert-wrap reveal reveal-delay-2">
-      <div class="edu-degree">
-        <div class="edu-card-year">2016 — 2021</div>
-        <h3 class="edu-degree-title">Comunicación Social y Medios</h3>
-        <div class="edu-card-org">Universidad Central · Bogotá</div>
-        <p class="edu-degree-note">Base en comunicación y estrategia, sobre la que construí una especialización data-driven en performance, growth e IA aplicada.</p>
-      </div>
-      <div class="cert-grid">
-      <div class="cert-card">
-        <span class="cert-year">dic. 2025</span>
-        <span class="cert-title">Fundamentos del Análisis de Datos</span>
-        <span class="cert-org">Microsoft &amp; LinkedIn</span>
-      </div>
-      <div class="cert-card">
-        <span class="cert-year">dic. 2025</span>
-        <span class="cert-title">Planeación y Medición de Campañas Digitales</span>
-        <span class="cert-org">Platzi</span>
-      </div>
-      <div class="cert-card growth" style="grid-column: span 2; border-color: var(--accent);">
-        <span class="cert-year">jul. 2025 · DESTACADO</span>
-        <span class="cert-title" style="font-size:16px; margin-bottom:4px;">Growth: Marketing y Producto para el Crecimiento</span>
-        <span class="cert-org">Platzi</span>
-        <span class="cert-badge">Certificación Clave</span>
-      </div>
-      <div class="cert-card">
-        <span class="cert-year">may. 2025</span>
-        <span class="cert-title">IA para Product Discovery &amp; Design</span>
-        <span class="cert-org">Platzi</span>
-      </div>
-      <div class="cert-card">
-        <span class="cert-year">dic. 2024</span>
-        <span class="cert-title">Google Data Analytics</span>
-        <span class="cert-org">Google</span>
-      </div>
-      <div class="cert-card">
-        <span class="cert-year">dic. 2024</span>
-        <span class="cert-title">Digital Marketing &amp; E-Commerce (Professional)</span>
-        <span class="cert-org">Google</span>
-      </div>
-      <div class="cert-card">
-        <span class="cert-year">dic. 2024</span>
-        <span class="cert-title">Inteligencia Artificial y Productividad</span>
-        <span class="cert-org">Google</span>
-      </div>
-      <div class="cert-card">
-        <span class="cert-year">may. 2024</span>
-        <span class="cert-title">Inbound Marketing</span>
-        <span class="cert-org">HubSpot Academy</span>
-      </div>
-      <div class="cert-card">
-        <span class="cert-year">may. 2023</span>
-        <span class="cert-title">Marketing de Contenidos</span>
-        <span class="cert-org">HubSpot Academy</span>
-      </div>
-      <div class="cert-card">
-        <span class="cert-year">abr. 2021</span>
-        <span class="cert-title">Digitaliza tu Negocio con Google</span>
-        <span class="cert-org">Google</span>
-      </div>
-      <div class="cert-card">
-        <span class="cert-year">may. 2020</span>
-        <span class="cert-title">Fundamentals of Digital Marketing</span>
-        <span class="cert-org">Google</span>
-      </div>
-      </div>
+    <div class="fm reveal reveal-delay-1">
+
+      <article class="fm-card">
+        <button class="fm-head" type="button" aria-expanded="false">
+          <span class="fm-kicker">01 &middot; Título universitario</span>
+          <span class="fm-title">Formación profesional</span>
+          <span class="fm-meta">2016 &mdash; 2021 &middot; Universidad Central</span>
+          <span class="fm-toggle" aria-hidden="true"></span>
+        </button>
+        <div class="fm-body">
+          <div class="fm-body-inner">
+            <h3 class="fm-degree">Comunicación Social y Medios</h3>
+            <div class="fm-degree-org">Universidad Central &middot; Bogotá</div>
+            <p class="fm-degree-note">Base en comunicación y estrategia, sobre la que construí
+              una especialización data-driven en performance, growth e IA aplicada.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="fm-card">
+        <button class="fm-head" type="button" aria-expanded="false">
+          <span class="fm-kicker">02 &middot; 6 certificaciones</span>
+          <span class="fm-title">Growth, data e IA</span>
+          <span class="fm-meta">Platzi &middot; Google &middot; Microsoft</span>
+          <span class="fm-toggle" aria-hidden="true"></span>
+        </button>
+        <div class="fm-body">
+          <div class="fm-body-inner">
+            <ul class="fm-list">
+            <li class="fm-row key"><span class="fm-row-year">jul. 2025</span><span class="fm-row-title">Growth: Marketing y Producto para el Crecimiento</span><span class="fm-row-org">Platzi</span><span class="fm-row-badge">Clave</span></li>
+            <li class="fm-row"><span class="fm-row-year">dic. 2025</span><span class="fm-row-title">Fundamentos del Análisis de Datos</span><span class="fm-row-org">Microsoft &amp; LinkedIn</span></li>
+            <li class="fm-row"><span class="fm-row-year">dic. 2025</span><span class="fm-row-title">Planeación y Medición de Campañas Digitales</span><span class="fm-row-org">Platzi</span></li>
+            <li class="fm-row"><span class="fm-row-year">dic. 2024</span><span class="fm-row-title">Google Data Analytics</span><span class="fm-row-org">Google</span></li>
+            <li class="fm-row"><span class="fm-row-year">may. 2025</span><span class="fm-row-title">IA para Product Discovery &amp; Design</span><span class="fm-row-org">Platzi</span></li>
+            <li class="fm-row"><span class="fm-row-year">dic. 2024</span><span class="fm-row-title">Inteligencia Artificial y Productividad</span><span class="fm-row-org">Google</span></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="fm-card">
+        <button class="fm-head" type="button" aria-expanded="false">
+          <span class="fm-kicker">03 &middot; 5 certificaciones</span>
+          <span class="fm-title">Marketing digital e inbound</span>
+          <span class="fm-meta">Google &middot; HubSpot Academy</span>
+          <span class="fm-toggle" aria-hidden="true"></span>
+        </button>
+        <div class="fm-body">
+          <div class="fm-body-inner">
+            <ul class="fm-list">
+            <li class="fm-row"><span class="fm-row-year">dic. 2024</span><span class="fm-row-title">Digital Marketing &amp; E-Commerce (Professional)</span><span class="fm-row-org">Google</span></li>
+            <li class="fm-row"><span class="fm-row-year">may. 2024</span><span class="fm-row-title">Inbound Marketing</span><span class="fm-row-org">HubSpot Academy</span></li>
+            <li class="fm-row"><span class="fm-row-year">may. 2023</span><span class="fm-row-title">Marketing de Contenidos</span><span class="fm-row-org">HubSpot Academy</span></li>
+            <li class="fm-row"><span class="fm-row-year">abr. 2021</span><span class="fm-row-title">Digitaliza tu Negocio con Google</span><span class="fm-row-org">Google</span></li>
+            <li class="fm-row"><span class="fm-row-year">may. 2020</span><span class="fm-row-title">Fundamentals of Digital Marketing</span><span class="fm-row-org">Google</span></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section class="section contact" id="contact">
     <div class="section-tag reveal">06 / Contacto</div>
     <h2 class="contact-title reveal reveal-delay-1">
@@ -2487,9 +2894,47 @@ const EXPERIENCES = {
   });
 })();
 
-// TRAYECTORIA - SLIDER
+// FORMACI\u00d3N - DESPLEGABLES
 (() => {
-  const root = document.getElementById('expSlider');
+  const cards = Array.from(document.querySelectorAll('.fm-card'));
+  if (!cards.length) return;
+  function set(card, on) {
+    const body = card.querySelector('.fm-body');
+    card.classList.toggle('open', on);
+    card.querySelector('.fm-head').setAttribute('aria-expanded', String(on));
+    body.style.maxHeight = on ? body.scrollHeight + 'px' : '0px';
+  }
+  cards.forEach(card => {
+    card.querySelector('.fm-head').addEventListener('click', () => {
+      const isOpen = card.classList.contains('open');
+      cards.forEach(c => { if (c !== card) set(c, false); });
+      set(card, !isOpen);
+    });
+  });
+  window.addEventListener('resize', () => {
+    const o = document.querySelector('.fm-card.open');
+    if (o) { const b = o.querySelector('.fm-body'); b.style.maxHeight = b.scrollHeight + 'px'; }
+  });
+})();
+
+// GROWTH SYSTEM - PESTA\u00d1AS
+(() => {
+  const tabs = Array.from(document.querySelectorAll('.st-tab'));
+  const panels = Array.from(document.querySelectorAll('.st-panel'));
+  if (!tabs.length) return;
+  function show(n) {
+    tabs.forEach((t, x) => { t.classList.toggle('active', x === n); t.setAttribute('aria-selected', String(x === n)); });
+    panels.forEach((pl, x) => pl.classList.toggle('active', x === n));
+  }
+  tabs.forEach((t, n) => {
+    t.addEventListener('click', () => show(n));
+    t.addEventListener('mouseenter', () => show(n));
+  });
+})();
+
+// CASOS - TARJETAS EXPANDIBLES
+(() => {
+  const root = document.getElementById('cases');
   if (!root || typeof EXPERIENCES === 'undefined') return;
 
   const ORDER = [
@@ -2500,103 +2945,61 @@ const EXPERIENCES = {
   ].filter(o => EXPERIENCES[o.key]);
   if (!ORDER.length) return;
 
-  const stage = root.querySelector('.exp-stage');
-  const logo  = root.querySelector('.exp-logo');
-  const role  = root.querySelector('.exp-role');
-  const year  = root.querySelector('.exp-year');
-  const reto  = root.querySelector('.exp-reto');
-  const resu  = root.querySelector('.exp-resultado');
-  const mets  = root.querySelector('.exp-metrics');
-  const cta   = root.querySelector('.exp-cta');
-  const track = root.querySelector('.exp-track');
-  const bar   = root.querySelector('.exp-progress-bar');
-  const prev  = root.querySelector('.exp-arrow.prev');
-  const next  = root.querySelector('.exp-arrow.next');
-
-  let i = 0, busy = false;
-
-  track.innerHTML = ORDER.map((o, n) => {
+  root.innerHTML = ORDER.map((o, n) => {
     const e = EXPERIENCES[o.key];
-    return '<button class="exp-chip" type="button" role="tab" data-i="' + n + '" aria-selected="' + (n === 0) + '">' +
-             '<span class="exp-chip-company">' + e.title + '</span>' +
-             '<span class="exp-chip-year">' + o.year + '</span>' +
-           '</button>';
+    const nums = e.metrics.map(m =>
+      '<li><span class="v">' + m[1] + '</span><span class="k">' + m[0] + '</span></li>').join('');
+    return '' +
+      '<article class="case' + (n % 2 === 1 ? ' warm' : '') + '" data-i="' + n + '">' +
+        '<button class="case-head" type="button" aria-expanded="false">' +
+          '<span class="case-logo-box"><img class="case-logo" src="' + o.logo + '.webp" alt="' + e.title + '" /></span>' +
+          '<span class="case-role">' + e.role + '</span>' +
+          '<span class="case-year">' + o.year + '</span>' +
+          '<span class="case-cue">' + (n === 0 ? 'Ver detalle +' : 'Ver detalle +') + '</span>' +
+        '</button>' +
+        '<div class="case-body">' +
+          '<div>' +
+            '<span class="case-label">El reto</span>' +
+            '<p class="case-text">' + e.reto + '</p>' +
+            '<span class="case-label">Resultado</span>' +
+            '<p class="case-text strong">' + e.resultado + '</p>' +
+          '</div>' +
+          '<ul class="case-nums">' + nums + '</ul>' +
+          '<button class="case-cta" type="button" data-key="' + o.key + '">Ver caso completo <span class="arrow">\u2192</span></button>' +
+        '</div>' +
+      '</article>';
   }).join('');
-  const chips = Array.from(track.querySelectorAll('.exp-chip'));
 
-  function fill(n) {
-    const o = ORDER[n], e = EXPERIENCES[o.key];
-    logo.onerror = function () { logo.onerror = null; logo.src = o.logo + '.png'; };
-    logo.src = o.logo + '.webp';
-    logo.alt = e.title;
-    role.textContent = e.role;
-    year.textContent = o.year;
-    reto.textContent = e.reto;
-    resu.textContent = e.resultado;
-    mets.innerHTML = e.metrics.map(function (m) {
-      return '<li><span class="v">' + m[1] + '</span><span class="k">' + m[0] + '</span></li>';
-    }).join('');
-    cta.onclick = function () { if (window.openCase) window.openCase(o.key); };
-    // Alterna el fondo: pares en negro, impares (Royal y Mercatus) en naranja
-    root.classList.toggle('warm', n % 2 === 1);
-    chips.forEach(function (c, x) {
-      c.classList.toggle('active', x === n);
-      c.setAttribute('aria-selected', String(x === n));
-    });
-    bar.style.width = ((n + 1) / ORDER.length * 100) + '%';
+  const cards = Array.from(root.querySelectorAll('.case'));
+
+  // Respaldo a PNG si el navegador no soporta WebP
+  cards.forEach((c, n) => {
+    const img = c.querySelector('.case-logo');
+    img.onerror = function () { img.onerror = null; img.src = ORDER[n].logo + '.png'; };
+  });
+
+  function set(card, on) {
+    card.classList.toggle('open', on);
+    card.querySelector('.case-head').setAttribute('aria-expanded', String(on));
+    card.querySelector('.case-cue').textContent = on ? 'Cerrar \u2212' : 'Ver detalle +';
   }
 
-  function go(n, dir) {
-    n = (n + ORDER.length) % ORDER.length;
-    if (busy || n === i) return;
-    busy = true;
-    root.style.setProperty('--dx', (dir > 0 ? 70 : -70) + 'px');
-    root.classList.remove('entering');
-    root.classList.add('leaving');
-    setTimeout(function () {
-      i = n;
-      fill(i);
-      root.classList.remove('leaving');
-      void root.offsetWidth;              // reinicia las animaciones CSS
-      root.classList.add('entering');
-      setTimeout(function () { root.classList.remove('entering'); busy = false; }, 700);
-    }, 210);
-  }
-
-  prev.addEventListener('click', function () { go(i - 1, -1); });
-  next.addEventListener('click', function () { go(i + 1, 1); });
-  chips.forEach(function (c) {
-    c.addEventListener('click', function () {
-      const n = +c.dataset.i;
-      go(n, n > i ? 1 : -1);
+  cards.forEach(card => {
+    card.querySelector('.case-head').addEventListener('click', () => {
+      const isOpen = card.classList.contains('open');
+      // Solo una abierta a la vez; volver a hacer clic la cierra
+      cards.forEach(c => { if (c !== card) set(c, false); });
+      set(card, !isOpen);
+      root.classList.toggle('has-open', !isOpen);
     });
   });
 
-  // Teclado, solo cuando la seccion esta a la vista y no hay modal abierto
-  document.addEventListener('keydown', function (ev) {
-    if (document.querySelector('.modal.open')) return;
-    const r = root.getBoundingClientRect();
-    if (r.top > innerHeight * 0.7 || r.bottom < innerHeight * 0.3) return;
-    if (ev.key === 'ArrowRight') { ev.preventDefault(); go(i + 1, 1); }
-    if (ev.key === 'ArrowLeft')  { ev.preventDefault(); go(i - 1, -1); }
+  root.querySelectorAll('.case-cta').forEach(btn => {
+    btn.addEventListener('click', ev => {
+      ev.stopPropagation();
+      if (window.openCase) window.openCase(btn.dataset.key);
+    });
   });
-
-  // Arrastrar con mouse / deslizar con el dedo
-  let x0 = null;
-  function down(e) { x0 = e.touches ? e.touches[0].clientX : e.clientX; }
-  function up(e) {
-    if (x0 === null) return;
-    const x1 = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-    const d = x1 - x0;
-    x0 = null;
-    if (Math.abs(d) > 60) go(i + (d < 0 ? 1 : -1), d < 0 ? 1 : -1);
-  }
-  stage.addEventListener('mousedown', down);
-  stage.addEventListener('mouseup', up);
-  stage.addEventListener('touchstart', down, { passive: true });
-  stage.addEventListener('touchend', up, { passive: true });
-
-  fill(0);
 })();
 
 </script>
